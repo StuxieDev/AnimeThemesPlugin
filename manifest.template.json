@@ -1,0 +1,12 @@
+[
+  {
+    "category": "Metadata",
+    "guid": "b9293812-40bb-4ee1-ad63-201df40affc6",
+    "name": "AnimeThemes",
+    "description": "Fetches anime themes (OPs and EDs) from animethemes.moe and saves them as Jellyfin theme songs or theme videos. Uses each item's AniDB ID, so the AniDB plugin is needed. Built for Jellyfin 12.",
+    "overview": "Anime openings and endings from animethemes.moe as theme songs and videos",
+    "owner": "StuxieDev",
+    "versions": [],
+    "imageUrl": "https://raw.githubusercontent.com/StuxieDev/AnimeThemesPlugin/main/Jellyfin.Plugin.AnimeThemes/banner.png"
+  }
+]
