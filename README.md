@@ -65,4 +65,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for development and release details.
 
 Based on [jellyfin-plugin-animethemes](https://github.com/EusthEnoptEron/jellyfin-plugin-animethemes) by EusthEnoptEron. Maintained by [StuxieDev](https://github.com/StuxieDev) as a standalone project, ported to Jellyfin 12. Themes come from [animethemes.moe](https://animethemes.moe).
 
-© Leo Ridgwell (StuxieDev) for changes made since the original. Licensed under the [GNU General Public License v3.0](LICENSE), like the code it's based on.
+© Leo Ridgwell (StuxieDev) for changes made since the original. Licensed under the [GNU General Public License v3.0](LICENSE.md), like the code it's based on.
