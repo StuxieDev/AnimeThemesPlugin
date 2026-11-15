@@ -317,8 +317,8 @@ public class AnimeThemesDownloader : IDisposable
 
     private bool IsSatisfied(BaseItem item, PluginConfiguration configuration)
     {
-        var audioSatisfied = item.GetThemeSongs().Any() || configuration.AudioSettings.FetchType == FetchType.None;
-        var videoSatisfied = item.GetThemeVideos().Any() || configuration.VideoSettings.FetchType == FetchType.None;
+        var audioSatisfied = item.GetThemeSongs().Count > 0 || configuration.AudioSettings.FetchType == FetchType.None;
+        var videoSatisfied = item.GetThemeVideos().Count > 0 || configuration.VideoSettings.FetchType == FetchType.None;
 
         return audioSatisfied && videoSatisfied;
     }
