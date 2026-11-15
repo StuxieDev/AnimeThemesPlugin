@@ -8,6 +8,11 @@ first [Date Versioning](https://datevers.ing) release (`YY.MM.DD`, the UTC relea
 There will be no v1.0.0. Jellyfin shows each version with a fourth part: `0.2.0` is `0.2.0.0`.
 Releases before v0.2.0 were first published with other numbers; each says which.
 
+## v0.3.1
+
+### Fixed
+- **The release builds again.** v0.3.0 never published: the current .NET SDK treats code-analysis rule CA1860 as an error, and the check for existing theme songs and videos used `Any()` on lists. It now compares `Count` to 0, which does the same thing.
+
 ## v0.3.0
 
 ### Changed
