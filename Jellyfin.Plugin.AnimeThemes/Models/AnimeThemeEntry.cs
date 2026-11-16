@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
 
 namespace Jellyfin.Plugin.AnimeThemes.Models;
@@ -23,5 +22,5 @@ public record AnimeThemeEntry(
     [property: JsonPropertyName("nsfw")] bool Nsfw,
     [property: JsonPropertyName("spoiler")]
     bool Spoiler,
-    [property: JsonPropertyName("videos")] Collection<Video> Videos
+    [property: JsonPropertyName("videos")] Connection<Video> Videos
 );

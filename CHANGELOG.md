@@ -8,6 +8,13 @@ first [Date Versioning](https://datevers.ing) release (`YY.MM.DD`, the UTC relea
 There will be no v1.0.0. Jellyfin shows each version with a fourth part: `0.2.0` is `0.2.0.0`.
 Releases before v0.2.0 were first published with other numbers; each says which.
 
+## v0.3.2
+
+### Fixed
+- **Theme searches work again.** AnimeThemes has retired its old JSON:API (`api.animethemes.moe`), which now only answers 503, so every "Search For Anime Themes" run failed. The plugin now asks their GraphQL API (`https://rs.animethemes.moe/graphql`) instead, with the `filterAnimeByExternalSite` query, following their "Migrating from JSON:API" guide: camelCase fields, `title.romaji` for the name, `themes` and `entries`, and lists wrapped in `nodes`. Errors the API reports in the response body now fail the run with their message, rather than being taken as "no themes".
+- **Videos without an audio track no longer break theme songs.** The API can return a video with no audio; those are skipped when picking theme songs and still used for theme videos.
+- **Insert songs (`IN`) and the API's new overlap names (`NONE`, `TRANS`, `OVER`) are understood**, so a show with an insert song no longer fails to load.
+
 ## v0.3.1
 
 ### Fixed
