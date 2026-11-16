@@ -132,7 +132,10 @@ public class AnimeThemesDownloader : IDisposable
     {
         var settings = type == MediaType.Audio ? configuration.AudioSettings : configuration.VideoSettings;
 
-        var distinctThemes = GetBestThemes(anime, settings).DistinctBy(it => it.Theme.Id);
+        // A video may have no audio track in the API, so theme songs only come from those that do.
+        var distinctThemes = GetBestThemes(anime, settings)
+            .Where(it => type != MediaType.Audio || it.Audio is not null)
+            .DistinctBy(it => it.Theme.Id);
 
         // Pick themes according to fetch type
         var requiredThemes = PickThemes(settings.FetchType, distinctThemes);
@@ -183,9 +186,9 @@ public class AnimeThemesDownloader : IDisposable
 
         foreach (var theme in themes)
         {
-            var link = isAudio ? theme.Audio.Link : theme.Video.Link;
+            var link = isAudio ? theme.Audio!.Link : theme.Video.Link;
             var path = isAudio
-                ? Path.Combine(ThemeMusicDirectory, $"{theme.Audio.Filename}__{settings.Volume * 100:0}.mp3")
+                ? Path.Combine(ThemeMusicDirectory, $"{theme.Audio!.Filename}__{settings.Volume * 100:0}.mp3")
                 : Path.Combine(ThemeVideoDirectory, $"{theme.Video.Filename}__{settings.Volume * 100:0}.webm");
 
             yield return (link, path);
@@ -350,7 +353,7 @@ public class AnimeThemesDownloader : IDisposable
     /// <returns>A filtered and sorted and flattened enumerable of themes.</returns>
     private IEnumerable<FlattenedTheme> GetBestThemes(Anime anime, MediaTypeConfiguration settings)
     {
-        return anime.Themes.SelectMany(theme => theme.Entries.SelectMany(entry => entry.Videos.Select(video => Wrap(theme, entry, video))))
+        return anime.Themes.SelectMany(theme => theme.Entries.SelectMany(entry => entry.Videos.Nodes.Select(video => Wrap(theme, entry, video))))
             .OrderBy(Rate)
             .Where(it => !settings.IgnoreOverlapping || it.Video.Overlap == OverlapType.None)
             .Where(it => !settings.IgnoreThemesWithCredits || it.Video.Creditless)

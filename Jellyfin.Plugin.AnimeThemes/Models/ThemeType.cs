@@ -16,5 +16,10 @@ public enum ThemeType
     /// <summary>
     /// Ending theme.
     /// </summary>
-    ED
+    ED,
+
+    /// <summary>
+    /// Insert song.
+    /// </summary>
+    IN
 }
