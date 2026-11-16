@@ -4,12 +4,12 @@ using System.Text.Json.Serialization;
 namespace Jellyfin.Plugin.AnimeThemes.Models;
 
 /// <summary>
-/// Represents an <a href="https://api-docs.animethemes.moe/animetheme/">anime theme</a>.
+/// Represents an anime theme (the GraphQL <c>Theme</c> type).
 /// </summary>
 /// <param name="Id">The primary key of the resource.</param>
-/// <param name="Type">The type of the sequence [OP, ED].</param>
+/// <param name="Type">The type of the sequence [OP, ED, IN].</param>
 /// <param name="Sequence">The numeric ordering of the theme.</param>
-/// <param name="Group">Used to distinguish sequence belongs to dubs, rebroadcasts, etc.</param>
+/// <param name="ThemeGroup">Used to distinguish sequence belongs to dubs, rebroadcasts, etc.</param>
 /// <param name="Slug">The URL slug &amp; route key of the resource.</param>
 /// <param name="Entries">Entries of the theme.</param>
 public record AnimeTheme(
@@ -17,8 +17,14 @@ public record AnimeTheme(
     [property: JsonPropertyName("type")] ThemeType? Type,
     [property: JsonPropertyName("sequence")]
     int? Sequence,
-    [property: JsonPropertyName("group")] string? Group,
+    [property: JsonPropertyName("group")] ThemeGroup? ThemeGroup,
     [property: JsonPropertyName("slug")] string? Slug,
-    [property: JsonPropertyName("animethemeentries")]
+    [property: JsonPropertyName("entries")]
     Collection<AnimeThemeEntry> Entries
-);
+)
+{
+    /// <summary>
+    /// Gets the name of the theme's group, if it has one.
+    /// </summary>
+    public string? Group => ThemeGroup?.Name;
+}
